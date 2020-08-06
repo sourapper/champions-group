@@ -1,0 +1,19 @@
+<?php
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$dbname = 'atmcstaff';
+
+try{
+	$dsn = 'mysql:host='.$host.'; dbname ='.$dbname;
+	$pdodbcon = new PDO($dsn,$user,$password);
+	
+	echo '<h1> Database Connected</h1>';
+}
+catch(PDOExecption $error)
+{
+$error->getMessage();
+echo 'Database Failed to Connect';
+	
+}
+?>
