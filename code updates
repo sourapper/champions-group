@@ -1,0 +1,34 @@
+<section 
+	<h1>ATMC STAFF DIRECTORY</h1>
+	<form action= "" method= "POST">
+	<input type="text" name="name" placeholder="Search for Employee"/> <br/>
+	<input type="submit" name="search" value="Search">
+	</form>
+	<?php
+	$connection = mysqli_connect("localhost","root","");
+	$db = mysqli_select_db($connection,'atmcstaff');
+	
+	if(isset($_POSt['search']))
+	{
+	$name = $_POSt['name'];
+	
+	$query = *SELECT * FROM atmc_record_list__sourabh__import where name= '$name'";
+	$query_run = mysqli_query($db,$query);
+	
+	while ($row =mysqli_fetch_array($query_run))
+	{
+	?>
+	<form action= "" method="POST">
+	<input type="text" name="Job Title" value="<?php echo $row['Job Title'] ?>" /><br>
+	<input type="text" name="Name" value="<?php echo $row['Name'] ?>" /><br>
+	<input type="text" name="Location" value="<?php echo $row['Location'] ?>" /><br>
+	<input type="text" name="Ext. No/DL" value="<?php echo $row['Ext. No/DL'] ?>" /><br>
+	<input type="text" name="Room No." value="<?php echo $row['Room No.'] ?>" /><br>
+	<input type="text" name="Email" value="<?php echo $row['Email'] ?>" /><br>
+	<input type="text" name="Phone" value="<?php echo $row['Phone'] ?>" /><br>
+	</form>
+	<?php
+	
+	}
+	?>
+    </section>
