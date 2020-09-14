@@ -1,0 +1,62 @@
+<?php
+
+$connection = mysqli_connect("localhost","root","");
+	$db = mysqli_select_db($connection,'atmcstaff');
+$message = '';
+
+if(isset($_POST["upload"]))
+{
+ if($_FILES['product_file']['name'])
+ {
+  $filename = explode(".", $_FILES['product_file']['name']);
+  if(end($filename) == "csv")
+  {
+   $handle = fopen($_FILES['product_file']['tmp_name'], "r");
+   while($data = fgetcsv($handle))
+
+   fclose($handle);
+   header("location: index.php?updation=1");
+  }
+  else
+  {
+   $message = '<label class="text-danger">Please Select CSV File only</label>';
+  }
+ }
+ else
+ {
+  $message = '<label class="text-danger">Please Select File</label>';
+ }
+}
+
+if(isset($_GET["updation"]))
+{
+ $message = '<label class="text-success">Product Updation Done</label>';
+}
+
+$query = "SELECT * FROM atmc_record_list__sourabh__import";
+$result = mysqli_query($connection, $query);
+?>
+
+    </section>
+	
+
+	<section
+	 
+	 <br />
+  <div class="container">
+   <h2 align="center">Update Database Through Uploading CSV File</a></h2>
+   <br />
+   <form method="post" enctype='multipart/form-data'>
+    <p><label>Please Select File(Only CSV Formate)</label>
+    <input type="file" name="product_file" /></p>
+    <br />
+    <input type="submit" name="upload" class="btn btn-info" value="Upload" />
+   </form>
+   <br />
+
+   
+   <?php echo $message; ?>
+
+
+</section>
+
